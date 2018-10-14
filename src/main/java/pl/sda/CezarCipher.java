@@ -10,46 +10,37 @@ public class CezarCipher {
         String plainText = getInputText();
 
         final int shift = 3;
-        String encriptedText = encrypt(plainText, shift);
-        String decryptedText = decrypt(plainText, shift);
+        String encriptedText = encrypt(plainText, shift, true);
+        String decryptedText = encrypt(encriptedText, shift, false);
 
         System.out.println("encriptedText: " + encriptedText);
+        System.out.println("decryptedText: " + decryptedText);
     }
 
     private static String getInputText() {
+        System.out.println("Podaj tekst do zaszyfrowania: ");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
-    private static String encrypt(String text, int shift) {
-
+    private static String encrypt(String text, int shift, boolean isEncrypt) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
-            result.append(getShiftedChar(text.charAt(i), shift));
+            result.append(getShiftedChar(text.charAt(i), shift, isEncrypt));
         }
         return result.toString();
     }
 
-    private static char getShiftedChar(char cipherChar, int shift) {
+    private static char getShiftedChar(char cipherChar, int shift, boolean isEncript) {
         int charValue = (int)cipherChar;
 
         if (cipherChar == ' ') {
             return ' ';
         }
 
-//        if (cipherChar <= 'A' + ALPHABET_LENTH - shift) {
-//            return (char) (charValue + shift);
-//        } else {
-//            return (char)((int)charValue - ALPHABET_LENTH + shift);
-//        }
-
-        return (char) (((charValue + shift - 'A') % ALPHABET_LENTH) + 'A');
-
+        if (isEncript) {
+            return (char) (((charValue + shift - 'A') % ALPHABET_LENTH) + 'A');
+        }
+        return (char) (((charValue - shift + 'A') % ALPHABET_LENTH) + 'A');
     }
-
-    private static String decrypt(String text, int shift) {
-        return null;
-    }
-
-
 }
