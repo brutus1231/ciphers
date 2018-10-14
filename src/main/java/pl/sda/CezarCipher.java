@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class CezarCipher {
 
-    public static final int ALPHABET_LENTH = 26;
+    private static final int ALPHABET_LENTH = 26;
 
     public static void main(String[] args) {
         String plainText = getInputText();
@@ -23,17 +23,17 @@ public class CezarCipher {
 
     private static String encrypt(String text, int shift) {
 
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
-            result += getShiftedChar(text.charAt(i), shift);
+            result.append(getShiftedChar(text.charAt(i), shift));
         }
-        return result;
+        return result.toString();
     }
 
     private static char getShiftedChar(char cipherChar, int shift) {
         int charValue = (int)cipherChar;
 
-        if(cipherChar == ' '){
+        if (cipherChar == ' ') {
             return ' ';
         }
 
