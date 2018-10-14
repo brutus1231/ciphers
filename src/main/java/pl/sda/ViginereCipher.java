@@ -13,11 +13,15 @@ public class ViginereCipher {
         final String key = generteKey(plainText);
         generateMatrix();
         printMatrix();
-        encrypt(plainText, key);
+        String encrptedText = encrypt(plainText, key);
+        System.out.println("\nencrptedText: " + encrptedText);
+
+        String decrptedText = decrypt(encrptedText, key);
+        System.out.println("decrptedText: " + decrptedText);
     }
 
     private static String generteKey(String plainText) {
-        String initKey = "ALAMAKOTA";
+        String initKey = "BREAK";
         StringBuilder key = new StringBuilder(initKey);
 
         if (plainText.length() <= key.length()) {
@@ -50,7 +54,17 @@ public class ViginereCipher {
     private static String encrypt(String plainText, String key) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < plainText.length(); i++) {
+            result.append(VIGINERE_MATRIX[plainText.charAt(i)-'A'][key.charAt(i)-'A']);
+        }
+        return result.toString();
+    }
 
+    private static String decrypt(String encryptedText, String key) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < encryptedText.length(); i++) {
+            result.append(
+                    VIGINERE_MATRIX[('A' - encryptedText.charAt(i))%ALPHABET_LENGTH]
+                            [('A' - key.charAt(i))%ALPHABET_LENGTH]);
         }
         return result.toString();
     }
