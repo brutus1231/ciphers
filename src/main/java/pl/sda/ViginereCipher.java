@@ -33,7 +33,7 @@ public class ViginereCipher {
     private static void generateMatrix() {
         for (int i = 0; i < ALPHABET_LENGTH; i++) {
             for (int j = 0; j < ALPHABET_LENGTH; j++) {
-                VIGINERE_MATRIX[i][j] = (char)('A' + (i + j) % ALPHABET_LENGTH);
+                VIGINERE_MATRIX[i][j] = (char) ('A' + (i + j) % ALPHABET_LENGTH);
             }
         }
     }
@@ -47,8 +47,12 @@ public class ViginereCipher {
         }
     }
 
-    private static void encrypt(String plainText, String key) {
+    private static String encrypt(String plainText, String key) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < plainText.length(); i++) {
 
+        }
+        return result.toString();
     }
 
     private static String getInputText() {
